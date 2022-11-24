@@ -32,6 +32,9 @@ const bankcard = {
             callback
         );
         });
-    }
+    },
+    checkPassword: function(card, callback){
+        return db.query('select pin_code from bank_card where card_number=?',[card],callback);
+      },
 };
 module.exports = bankcard;
