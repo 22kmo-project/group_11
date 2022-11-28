@@ -9,6 +9,10 @@ const jwt = require('jsonwebtoken');
 var userRouter = require('./routes/user');
 var bankcardRouter = require('./routes/bankcard');
 var loginRouter = require('./routes/login');
+var bank_accountRouter = require('./routes/bank_account');
+var transactionsRouter = require('./routes/transactions');
+var bank_account_bank_cardRouter = require('./routes/bank_account_bank_card');
+
 
 var app = express();
 
@@ -24,6 +28,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/user', userRouter);
 app.use('/login', loginRouter);
 app.use('/bankcard', bankcardRouter);
+app.use('/bank_account', bank_accountRouter);
+app.use('/transactions', transactionsRouter);
+app.use('/bank_account_bank_card', bank_account_bank_cardRouter);
+
 
 app.use(authenticateToken);
 //SUOJATUT ENDPOINTIT
