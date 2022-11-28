@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const transactions = require('../models/transactions_model');
+const bank_account = require('../models/bank_account_bank_card_model');
 
 router.get('/',
     function (request, response) {
-        transactions.getAll(function (err, dbResult) {
+        bank_account.getAll(function (err, dbResult) {
             if (err) {
                 response.json(err);
             } else {
@@ -16,7 +16,7 @@ router.get('/',
 
 router.get('/:id?',
     function (request, response) {
-        transactions.getById(request.params.id, function (err, dbResult) {
+        bank_account.getById(request.params.id, function (err, dbResult) {
             if (err) {
                 response.json(err);
             } else {
@@ -28,7 +28,7 @@ router.get('/:id?',
 
 router.post('/',
     function (request, response) {
-        transactions.add(request.body, function (err, dbResult) {
+        bank_account.add(request.body, function (err, dbResult) {
             if (err) {
                 response.json(err);
             } else {
@@ -40,7 +40,7 @@ router.post('/',
 
 router.delete('/:id',
     function (request, response) {
-        transactions.delete(request.params.id, function (err, dbResult) {
+        bank_account.delete(request.params.id, function (err, dbResult) {
             if (err) {
                 response.json(err);
             } else {
@@ -52,7 +52,7 @@ router.delete('/:id',
 
 router.put('/:id',
     function (request, response) {
-        transactions.update(request.params.id, request.body, function (err, dbResult) {
+        bank_account.update(request.params.id, request.body, function (err, dbResult) {
             if (err) {
                 response.json(err);
             } else {
