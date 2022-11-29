@@ -1,3 +1,5 @@
 backend/node_modules/
 frontend/build/
 frontend/*.user
+.vs/
+backend/sql/bank_simu.mwb.bak

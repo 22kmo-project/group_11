@@ -9,8 +9,8 @@ const bank_account = {
     },
     add: function (bank_account, callback) {
         return db.query(
-            'insert into bank_account (balance,user_iduser,credit_limit) values(?,?,?)',
-            [bank_account.balance, bank_account.user_iduser, bank_account.credit_limit],
+            'insert into bank_account (balance,user_iduser,credit_limit) values(?,?,?,?)',
+            [bank_account.balance, bank_account.user_iduser, bank_account.credit_limit, bank_account.is_credit],
             callback
         );
     },
@@ -19,8 +19,8 @@ const bank_account = {
     },
     update: function (id, bank_account, callback) {
         return db.query(
-            'update bank_account set balance=?,user_iduser=?,credit_limit=? where idbank_account=?',
-            [bank_account.balance, bank_account.user_iduser, bank_account.credit_limit, id],
+            'update bank_account set balance=?,user_iduser=?,credit_limit=?, is_credit=? where idbank_account=?',
+            [bank_account.balance, bank_account.user_iduser, bank_account.credit_limit, bank_account.is_credit, id],
             callback
         );
     }
