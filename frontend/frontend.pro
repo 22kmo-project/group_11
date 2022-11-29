@@ -12,7 +12,8 @@ CONFIG += c++17
 SOURCES += \
     bankwindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    myurl.cpp
 
 HEADERS += \
     bankwindow.h \

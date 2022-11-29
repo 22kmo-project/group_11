@@ -23,11 +23,13 @@ public:
     void setWebToken(const QByteArray &newWebToken);
 
 private slots:
-    void on_btnGrades_clicked();
-    void gradeSlot(QNetworkReply *reply);
-    void dataSlot(QNetworkReply *reply);
+    //void on_btnGrades_clicked();
+    //void gradeSlot(QNetworkReply *reply);
+    //void dataSlot(QNetworkReply *reply);
 
-    void on_btnMyData_clicked();
+    //void on_btnMyData_clicked();
+
+
 
 private:
     Ui::BankWindow *ui;

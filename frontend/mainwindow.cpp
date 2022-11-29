@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "bankwindow.h"
 #include "ui_mainwindow.h"
+#include "myurl.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -60,7 +61,7 @@ void MainWindow::loginSlot(QNetworkReply *reply)
         else{
             if(test==0){
                 ui->textBankCard->clear();
-                ui->textBankCard->clear();
+                ui->textPinCode->clear();
                 ui->labelInfo->setText("Tunnus ja salasana eivät täsmää");
             }
             else {

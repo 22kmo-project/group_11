@@ -9,7 +9,7 @@ BankWindow::BankWindow(QString bankcard, QWidget *parent) :
     ui(new Ui::BankWindow)
 {
     ui->setupUi(this);
-    ui->labelCard->setText(bankcard);
+    ui->Testi->setText(bankcard);
     myBankCard=bankcard;
 }
 
@@ -23,3 +23,6 @@ void BankWindow::setWebToken(const QByteArray &newWebToken)
 {
     webToken = newWebToken;
 }
+
+
+
