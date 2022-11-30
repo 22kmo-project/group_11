@@ -12,6 +12,7 @@ var loginRouter = require('./routes/login');
 var bank_accountRouter = require('./routes/bank_account');
 var transactionsRouter = require('./routes/transactions');
 var bank_account_bank_cardRouter = require('./routes/bank_account_bank_card');
+var bank_operationsRouter = require('./routes/bank_operations');
 
 
 var app = express();
@@ -31,6 +32,7 @@ app.use('/bankcard', bankcardRouter);
 app.use('/bank_account', bank_accountRouter);
 app.use('/transactions', transactionsRouter);
 app.use('/bank_account_bank_card', bank_account_bank_cardRouter);
+app.use('/bank_operations', bank_operationsRouter);
 
 
 app.use(authenticateToken);
