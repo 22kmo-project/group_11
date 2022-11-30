@@ -9,7 +9,7 @@ const bank_account_bank_card = {
     },
     add: function (bank_account_bank_card, callback) {
         return db.query(
-            'insert into bank_account_bank_card (bank_account_idbank_account,bank_card_idbank_card,) values(?,?)',
+            'insert into bank_account_bank_card (bank_account_idbank_account,bank_card_idbank_card) values(?,?)',
             [bank_account_bank_card.bank_account_idbank_account, bank_account_bank_card.bank_card_idbank_card],
             callback
         );

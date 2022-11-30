@@ -5,6 +5,12 @@
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QJsonArray>
+#include <payment.h>
+#include "withdrawal.h"
+#include "transactions.h"
 
 namespace Ui {
 class BankWindow;
@@ -23,21 +29,23 @@ public:
     void setWebToken(const QByteArray &newWebToken);
 
 private slots:
-    //void on_btnGrades_clicked();
-    //void gradeSlot(QNetworkReply *reply);
-    //void dataSlot(QNetworkReply *reply);
+    void balanceSlot(QNetworkReply *reply);
 
-    //void on_btnMyData_clicked();
-
-
+    void on_NostoPankkibtn_clicked();
+    void on_MaksuPankkibtn_clicked();
+    void on_TransBankbtn_clicked();
+    void on_NostoCreditbtn_clicked();
+    void on_MaksuCreditbtn_clicked();
+    void on_TransCreditbtn_clicked();
 
 private:
     Ui::BankWindow *ui;
     QByteArray webToken;
     QString myBankCard;
+    QString idbank_account;
 
-    //QNetworkAccessManager *gradeManager;
-    //QNetworkAccessManager *dataManager;
+    QNetworkAccessManager *bankManager;
+    QNetworkAccessManager *balanceManager;
     QNetworkReply *reply;
     QByteArray response_data;
 };
