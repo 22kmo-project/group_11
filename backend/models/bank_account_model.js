@@ -9,7 +9,7 @@ const bank_account = {
     },
     add: function (bank_account, callback) {
         return db.query(
-            'insert into bank_account (balance,user_iduser,credit_limit) values(?,?,?,?)',
+            'insert into bank_account (balance,user_iduser,credit_limit, is_credit) values(?,?,?,?)',
             [bank_account.balance, bank_account.user_iduser, bank_account.credit_limit, bank_account.is_credit],
             callback
         );
@@ -24,5 +24,6 @@ const bank_account = {
             callback
         );
     }
+   
 };
 module.exports = bank_account;
