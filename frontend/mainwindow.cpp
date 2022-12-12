@@ -68,6 +68,7 @@ void MainWindow::loginSlot(QNetworkReply *reply)
                 objectBankWindow=new BankWindow(bankcard);
                 objectBankWindow->setWebToken("Bearer "+response_data);
                 objectBankWindow->show();
+                hide();             // hides login window after succesfull login into bank
             }
         }
     }
