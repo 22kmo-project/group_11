@@ -14,7 +14,7 @@ BankWindow::BankWindow(QString bankcard, QWidget *parent) :
     myBankCard=bankcard;
 
 
-    QString site_url=MyURL::getBaseUrl()+"/bank_account/";
+    QString site_url=MyURL::getBaseUrl()+"/bank_operations/cardinfo/"+bankcard;
     QNetworkRequest request((site_url));
     //WEBTOKEN ALKU
     request.setRawHeader(QByteArray("Authorization"),(webToken));
@@ -40,43 +40,43 @@ void BankWindow::balanceSlot(QNetworkReply *reply)
 {
 
     //get function to fetch balance from backend
-    QByteArray response_data=reply->readAll();
-    QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
-    QJsonArray json_array = json_doc.array();
-    QString balance="";
-    foreach (const QJsonValue &value, json_array) {
-        QJsonObject json_object = value.toObject();
-        balance+=QString::number(json_object["balance"].toDouble());
-    }
-    //get function to fetch idbank_account from backend
-    QString idbank_account="";
-    foreach (const QJsonValue &value, json_array) {
-        QJsonObject json_object1 = value.toObject();
-        idbank_account+=QString::number(json_object1["idbank_account"].toInt());
-    }
-    //get function to fetch credit_limit from backend
-    QString creditlimit="";
-    foreach (const QJsonValue &value, json_array) {
-        QJsonObject json_obj = value.toObject();
-        creditlimit+=QString::number(json_obj["credit_limit"].toDouble());
-    }
-    //get fuction to fetch credit_acc from backend
-    QString creditacc="";
-    foreach (const QJsonValue &value, json_array) {
-        QJsonObject json_obj = value.toObject();
-        creditacc+=QString::number(json_obj[""].toDouble());
-    }
-    /*qDebug()<<idbank_account;
-    qDebug()<<balance;
-    qDebug()<<creditlimit;
-    qDebug()<<creditacc;*/
-    ui->Pankkitili_num->setText(idbank_account);
-    ui->Saldo_pankTili->setText(balance);
-    ui->Saldo_luotTili->setText(creditlimit);
-    ui->LuottoTiliNum->setText(creditacc);
+        QByteArray response_data=reply->readAll();
+        QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
+        QJsonObject json_object = json_doc.object();
 
-    //reply->deleteLater();
-    //balanceManager->deleteLater();
+        QString balance="";
+        if(json_object["debit"].isObject()){
+            QJsonObject debit = json_object["debit"].toObject();
+
+            //fetch balance from backend
+            balance=QString::number(debit["balance"].toDouble());
+
+            //fetch idbank_account from backend
+            idbank_account=QString::number(debit["idbank_account"].toInt());
+        }
+
+        QString creditlimit="";
+        if(json_object["credit"].isObject()){
+            QJsonObject credit = json_object["credit"].toObject();
+
+            //fetch credit_limit from backend
+            creditlimit=QString::number(credit["credit_limit"].toDouble());
+
+            //fetch credit_acc from backend
+            creditacc=QString::number(credit["idbank_account"].toDouble());
+        }
+
+        qDebug()<<idbank_account;
+        qDebug()<<balance;
+        qDebug()<<creditlimit;
+        qDebug()<<creditacc;
+        ui->Pankkitili_num->setText(idbank_account);
+        ui->Saldo_pankTili->setText(balance);
+        ui->Saldo_luotTili->setText(creditlimit);
+        ui->LuottoTiliNum->setText(creditacc);
+
+        //reply->deleteLater();
+        //balanceManager->deleteLater();
 }
 
 
@@ -84,7 +84,8 @@ void BankWindow::balanceSlot(QNetworkReply *reply)
 //opens withdraw window from bank account
 void BankWindow::on_NostoPankkibtn_clicked()
 {
-    withdrawal withwindow;
+    qDebug()<<idbank_account;
+    withdrawal withwindow(idbank_account);
     withwindow.setModal(true);
     withwindow.exec();
     hide();
@@ -111,10 +112,10 @@ void BankWindow::on_TransBankbtn_clicked()
 //opens withdraw window from credit account
 void BankWindow::on_NostoCreditbtn_clicked()
 {
-    withdrawal creditwithwindow;
+    withdrawal creditwithwindow(creditacc);
     creditwithwindow.setModal(true);
     creditwithwindow.exec();
-    //hide();
+    hide();
 }
 
 //opens transfer window from credit account

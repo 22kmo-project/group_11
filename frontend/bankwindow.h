@@ -43,6 +43,7 @@ private:
     QByteArray webToken;
     QString myBankCard;
     QString idbank_account;
+    QString creditacc;
 
     QNetworkAccessManager *bankManager;
     QNetworkAccessManager *balanceManager;

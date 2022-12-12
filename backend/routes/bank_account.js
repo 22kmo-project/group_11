@@ -61,4 +61,15 @@ router.put('/:id',
         });
     });
 
+    router.post('/nosto',
+    function (request, response) {
+        bank_account.nosto(request.body, function (err, dbResult) {
+            if (err) {
+                response.json(err);
+            } else {
+                response.json(request.body);
+            }
+        });
+    });
+
 module.exports = router;
